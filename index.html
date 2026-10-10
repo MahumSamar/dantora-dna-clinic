@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dantora — Medicine that starts with understanding you</title>
+<meta name="description" content="Advanced diagnostics, genetic screening and specialist care in one clinic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..700&family=Figtree:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #286b57;
+    --green-deep: #1f5a48;
+    --yellow: #f2fbab;
+    --ink: #0b0e0d;
+    --muted: #8b9692;
+    --paper: #e9efec;
+    --mint: #dfeee6;
+    --white: #ffffff;
+    --pad: 26px;
+    --radius-xl: 28px;
+    --radius-card: 22px;
+    --font: "Google Sans Flex", "Google Sans", "Figtree", "Helvetica Neue", Arial, sans-serif;
+    --ease: cubic-bezier(.22, .8, .24, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, p { margin: 0; font-weight: 400; }
+  a { color: inherit; text-decoration: none; }
+  button, input, textarea { font: inherit; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .display {
+    font-size: clamp(34px, 4.27vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -.012em;
+  }
+  .body { font-size: 14px; line-height: 1.19; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 154px;
+    padding: 0 28px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 17px;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform .35s var(--ease), background-color .25s, box-shadow .25s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .btn-green {
+    background: var(--green);
+    border-color: var(--green-deep);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .btn-green:hover { background: #2f7862; }
+  .btn-yellow {
+    background: var(--yellow);
+    border-color: #e9f39c;
+    color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(242,251,171,.35);
+  }
+  .btn-yellow:hover { background: #edf89a; }
+  :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+  .arrow { width: 16px; height: 16px; flex: none; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: fixed;
+    z-index: 50;
+    top: 10px;
+    left: var(--pad);
+    right: var(--pad);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    pointer-events: none;
+  }
+  .nav > * { pointer-events: auto; }
+  .glass {
+    background: rgba(255,255,255,.62);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border-radius: 6px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 46px;
+    padding: 0 14px 0 5px;
+    font-size: 18px;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    flex: none;
+    display: grid; place-items: center;
+    background: var(--green);
+    border-radius: 4px;
+  }
+  .logo-mark svg { width: 22px; height: 22px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    height: 46px;
+    padding: 0 19px;
+  }
+  .nav-links a {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: opacity .2s;
+  }
+  .nav-links a:hover { opacity: .55; }
+  .nav-spacer { flex: 1; pointer-events: none; }
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    height: 46px;
+    padding: 0 3px 0 27px;
+    border-radius: 999px;
+    background: var(--green);
+    border: 1px solid var(--green-deep);
+    color: #fff;
+    font-size: 17px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+    transition: opacity .4s, transform .5s var(--ease), background-color .25s;
+  }
+  .contact-btn:hover { background: #2f7862; }
+  .contact-btn .dot {
+    width: 38px; height: 38px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--ink);
+    transition: transform .4s var(--ease);
+  }
+  .contact-btn:hover .dot { transform: rotate(45deg); }
+  .nav.at-contact .contact-btn { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+  .menu-btn {
+    display: none;
+    width: 46px; height: 46px;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    place-items: center;
+  }
+  .menu-btn span, .menu-btn span::before {
+    display: block; width: 18px; height: 1.5px; background: var(--ink); content: "";
+    transition: transform .3s var(--ease);
+  }
+  .menu-btn span::before { transform: translateY(6px); }
+  .nav.open .menu-btn span { transform: translateY(3px) rotate(45deg); }
+  .nav.open .menu-btn span::before { transform: rotate(-90deg); }
+
+  /* ---------- DNA canvas ---------- */
+  .dna {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: max(100vh, 640px);
+    min-height: max(100svh, 640px);
+    background: var(--paper);
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-main {
+    position: relative;
+    flex: 1;
+    padding: 28.2vh var(--pad) 40px;
+  }
+  .hero-main .display { margin-top: 31px; max-width: 12.6em; }
+  .hero-main .body { margin-top: 44px; max-width: 446px; }
+  .hero-foot {
+    position: relative;
+    margin: 0 var(--pad);
+    padding: 44px 0 50px;
+    border-top: 1px solid rgba(11,14,13,.14);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .trusted {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--green);
+    font-size: 14px;
+  }
+  .trusted::after { content: ""; width: 42px; height: 1px; background: currentColor; opacity: .7; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .chips { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; margin-bottom: 12px; }
+  .chips-row { display: flex; gap: 7px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.5);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 0 1px 2px rgba(20,50,40,.04);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background-color .25s;
+  }
+  .chip:hover { background: rgba(255,255,255,.9); }
+
+  /* ---------- why ---------- */
+  .why {
+    background: var(--white);
+    padding: 282px var(--pad) 284px;
+    text-align: center;
+  }
+  .why .display { margin: 36px auto 0; max-width: 11em; }
+  .why .body { margin: 46px auto 0; max-width: 370px; }
+  .why .cta-row { justify-content: center; margin-top: 40px; }
+
+  /* ---------- services (pinned horizontal scroll) ---------- */
+  .services-pin { position: relative; }
+  .services {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 600px;
+    background: var(--paper);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .services-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 118px var(--pad) 0;
+    min-height: 337px;
+  }
+  .services-head .display { max-width: 11.5em; }
+  .services-side { width: 291px; flex: none; padding-top: 2px; }
+  .services-side .body { margin-top: 48px; }
+  .services-view { flex: 1; min-height: 0; padding-bottom: 33px; }
+  .services-track {
+    display: flex;
+    gap: 9px;
+    height: 100%;
+    width: max-content;
+    padding: 0 var(--pad);
+    will-change: transform;
+  }
+  .svc {
+    position: relative;
+    flex: none;
+    width: 381px;
+    height: 100%;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    padding: 24px 27px 22px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    background: var(--green);
+    isolation: isolate;
+  }
+  .svc--list { width: 478px; background: var(--yellow); color: var(--ink); }
+  .svc img {
+    position: absolute; inset: 0; z-index: -2;
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1.2s var(--ease);
+  }
+  .svc:hover img { transform: scale(1.04); }
+  .svc--img::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(0,10,25,.38) 0%, rgba(0,10,25,0) 34%, rgba(0,10,25,0) 66%, rgba(0,10,25,.42) 100%);
+  }
+  .svc-num { font-size: 16px; }
+  .svc-title { margin-top: 15px; font-size: 26px; line-height: 1.15; letter-spacing: -.005em; }
+  .svc-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .svc-foot span { padding-bottom: 2px; }
+  .ring {
+    width: 62px; height: 62px;
+    display: grid; place-items: center;
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: 50%;
+    transition: background-color .3s, color .3s, transform .4s var(--ease);
+  }
+  .ring .arrow { width: 18px; height: 18px; }
+  .svc:hover .ring { background: #fff; color: var(--ink); transform: rotate(45deg); }
+  .svc-list { margin: auto 0 0; padding: 0; list-style: none; }
+  .svc-list li + li { border-top: 1px solid rgba(11,14,13,.09); }
+  .svc-list a {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 62px;
+    font-size: 16px; font-weight: 500;
+  }
+  .svc-list .arrow { width: 18px; height: 18px; transition: transform .35s var(--ease); }
+  .svc-list a:hover .arrow { transform: translate(3px, -3px); }
+  .svc--list { padding-bottom: 6px; }
+
+  /* ---------- about + team (mint block) ---------- */
+  .mint {
+    position: relative;
+    z-index: 2;
+    margin-top: -100vh;
+    background: var(--mint);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+  .about { padding: 34px var(--pad) 250px; }
+  .about-photo {
+    width: 100%;
+    height: clamp(220px, 35vw, 520px);
+    border-radius: var(--radius-card);
+    object-fit: cover;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 487fr) minmax(0, 673fr);
+    margin-top: 62px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: 196px 196px;
+    row-gap: 75px;
+    margin-top: 76px;
+  }
+  .stat { border-left: 1px solid rgba(40,107,87,.75); padding-left: 21px; height: 80px; }
+  .stat b {
+    display: block;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: .86;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span { display: block; margin-top: 21px; font-size: 14px; }
+  .lede {
+    font-size: clamp(22px, 2.56vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -.004em;
+    color: var(--muted);
+    max-width: 21em;
+  }
+  .lede strong { font-weight: 400; color: var(--ink); }
+  .lede sup { font-size: .55em; line-height: 0; }
+  .about-copy .cta-row { margin-top: 112px; gap: 14px; }
+
+  .team-pin { height: 200vh; }
+  .team {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding-top: 126px;
+  }
+  .team-row {
+    display: flex;
+    gap: 9px;
+    padding: 0 var(--pad);
+    overflow-x: auto;
+    scrollbar-width: none;
+    cursor: grab;
+    -webkit-user-select: none; user-select: none;
+  }
+  .team-row::-webkit-scrollbar { display: none; }
+  .team-row.dragging { cursor: grabbing; }
+  .team-card, .doc {
+    flex: none;
+    height: min(640px, calc(100vh - 160px));
+    min-height: 420px;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .team-card {
+    width: 381px;
+    background: var(--green);
+    color: #fff;
+    padding: 27px;
+    display: flex;
+    flex-direction: column;
+  }
+  .team-card .eyebrow { color: rgba(255,255,255,.72); }
+  .team-card h2 { margin-top: 32px; font-size: 28px; line-height: 1.07; letter-spacing: -.008em; max-width: 11em; }
+  .socials { margin-top: auto; display: flex; gap: 11px; }
+  .socials a {
+    width: 54px; height: 54px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    transition: background-color .25s;
+  }
+  .socials a:hover { background: rgba(255,255,255,.24); }
+  .socials svg { width: 18px; height: 18px; fill: #fff; }
+  .doc { position: relative; width: 283px; background: #d5d7da; }
+  .doc img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; }
+  .doc figcaption {
+    position: absolute; left: 27px; right: 27px; bottom: 16px;
+    padding: 10px 8px 11px;
+    border-radius: 6px;
+    background: rgba(226,229,232,.86);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    text-align: center;
+  }
+  .doc figcaption b { display: block; font-size: 14px; font-weight: 600; }
+  .doc figcaption span { display: block; margin-top: 5px; font-size: 12px; color: #6d7672; }
+  figure { margin: 0; }
+
+  /* ---------- contact ---------- */
+  .contact {
+    position: relative;
+    z-index: 3;
+    margin-top: -100vh;
+    min-height: max(100vh, 760px);
+    background: var(--paper);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 479px;
+    gap: 20px;
+    padding: 58px var(--pad) 0;
+  }
+  .contact-copy { position: relative; align-self: center; padding-bottom: 40px; }
+  .contact-copy .display { margin-top: 34px; max-width: 12em; }
+  .contact-copy .body { margin-top: 46px; max-width: 330px; }
+  .form-card {
+    position: relative;
+    background: rgba(255,255,255,.93);
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    padding: 27px 27px 13px;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-card h3 { margin-top: 20px; font-size: 32px; line-height: 1.1; letter-spacing: -.008em; }
+  .field { display: block; margin-top: 30px; }
+  .field + .field { margin-top: 24px; }
+  .field .eyebrow { display: block; margin-bottom: 12px; }
+  .field input, .field textarea {
+    display: block;
+    width: 100%;
+    height: 58px;
+    padding: 0 27px;
+    border: 1px solid #dde2df;
+    border-radius: 6px;
+    background: rgba(255,255,255,.75);
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .field textarea { padding-top: 20px; line-height: 1.2; }
+  .field input::placeholder, .field textarea::placeholder { color: #6f7673; }
+  .field input:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(40,107,87,.12); }
+  .consent { margin-top: 18px; font-size: 14px; line-height: 1.2; color: #58615d; }
+  .consent a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .send {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 46px;
+    padding: 0 3px 0 27px;
+    border-radius: 999px;
+    border: 1px solid var(--green-deep);
+    background: var(--green);
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+    transition: background-color .25s;
+  }
+  .send:hover { background: #2f7862; }
+  .send .dot {
+    width: 38px; height: 38px; display: grid; place-items: center;
+    border-radius: 50%; background: var(--yellow); color: var(--ink);
+    transition: transform .4s var(--ease);
+  }
+  .send:hover .dot { transform: rotate(45deg); }
+  .form-gap { flex: 1; min-height: 60px; }
+
+  /* ---------- text reveal ---------- */
+  .js [data-reveal] .w {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(.18em);
+    transition: opacity .8s var(--ease), filter .8s var(--ease), transform .8s var(--ease);
+    transition-delay: calc(var(--i) * var(--step, 38ms));
+    will-change: opacity, filter;
+  }
+  .js [data-reveal].in .w { opacity: 1; filter: blur(0); transform: none; }
+  .js [data-fade] {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .8s var(--ease) .15s, transform .8s var(--ease) .15s;
+  }
+  .js [data-fade].in { opacity: 1; transform: none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 1020px) {
+    .contact { grid-template-columns: minmax(0, 1fr) 420px; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    :root { --pad: 16px; --radius-xl: 22px; --radius-card: 18px; }
+    .nav { top: 8px; flex-wrap: wrap; }
+    .nav-links {
+      order: 5;
+      flex-basis: 100%;
+      height: auto;
+      padding: 8px;
+      flex-direction: column;
+      align-items: stretch;
+      display: none;
+      background: rgba(255,255,255,.92);
+    }
+    .nav.open .nav-links { display: flex; }
+    .nav-links a { padding: 13px 12px; font-size: 16px; }
+    .menu-btn { display: grid; }
+    .contact-btn { font-size: 15px; padding-left: 20px; }
+
+    .hero-main { padding-top: 132px; padding-bottom: 56px; }
+    .hero-main .display { margin-top: 22px; }
+    .hero-main .body { margin-top: 26px; max-width: 340px; }
+    .hero .dna { opacity: .8; }
+    .hero-foot { flex-direction: column; align-items: stretch; padding: 28px 0 28px; gap: 26px; }
+    .cta-row { margin-top: 22px; gap: 10px; }
+    .chips { align-items: flex-start; margin-bottom: 0; }
+    .chips-row { flex-wrap: wrap; }
+    .chip { padding: 0 18px; }
+
+    .why { padding: 130px var(--pad) 140px; }
+    .why .display { margin-top: 24px; }
+    .why .body { margin-top: 28px; }
+
+    .services-pin { height: auto !important; }
+    .services { position: relative; height: auto; min-height: 0; padding-bottom: 28px; }
+    .services-head { flex-direction: column; gap: 28px; padding-top: 72px; min-height: 0; }
+    .services-side { width: auto; max-width: 340px; }
+    .services-side .body { margin-top: 16px; }
+    .services-view {
+      margin-top: 40px; padding-bottom: 0;
+      overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .services-view::-webkit-scrollbar { display: none; }
+    .services-track { transform: none !important; height: 440px; scroll-padding: 0 var(--pad); }
+    .svc { width: min(78vw, 340px); scroll-snap-align: center; padding: 20px 20px 18px; }
+    .svc--list { width: min(86vw, 380px); }
+    .svc-title { font-size: 23px; }
+    .ring { width: 52px; height: 52px; }
+
+    .mint, .contact { margin-top: 0; }
+    .about { padding: 16px var(--pad) 90px; }
+    .about-grid { grid-template-columns: 1fr; margin-top: 36px; }
+    .about-grid { display: block; }
+    .about-stats .eyebrow { margin-bottom: 36px; }
+    .about-copy { margin-top: 64px; }
+    .about-copy .cta-row { margin-top: 36px; }
+    .stats { margin-top: 0; row-gap: 44px; column-gap: 12px; }
+    .stat b { font-size: 44px; }
+
+    .team-pin { height: auto; }
+    .team { position: relative; height: auto; padding: 0 0 var(--pad); }
+    .team-card, .doc { height: 460px; min-height: 0; }
+    .team-card { width: min(78vw, 320px); padding: 22px; }
+    .team-card h2 { font-size: 25px; margin-top: 24px; }
+    .socials a { width: 48px; height: 48px; }
+    .doc { width: min(66vw, 270px); }
+    .doc figcaption { left: 16px; right: 16px; bottom: 14px; }
+
+    .contact { display: block; min-height: 0; padding: 96px var(--pad) 0; }
+    .contact-copy { padding-bottom: 56px; }
+    .contact-copy .display { margin-top: 22px; }
+    .contact-copy .body { margin-top: 26px; }
+    .form-card { padding: 22px 20px 16px; }
+    .form-card h3 { font-size: 28px; }
+    .form-gap { min-height: 36px; flex: none; }
+  }
+
+  @media (max-width: 420px) {
+    .btn { min-width: 0; padding: 0 22px; font-size: 16px; }
+    .brand { font-size: 17px; padding-right: 12px; }
+    .contact-btn span.label { display: none; }
+    .contact-btn { padding-left: 3px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] .w, .js [data-fade] { transition-duration: .01s; transition-delay: 0s; filter: none; }
+    .btn, .svc img, .ring, .dot { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="square">
+    <path d="M2.5 13.5 13.5 2.5M3.5 2.5h10v10"/>
+  </symbol>
+  <symbol id="i-logo" viewBox="0 0 24 24" fill="none" stroke="#e9f5a0" stroke-width="1.5" stroke-linecap="round">
+    <circle cx="12" cy="12" r="4.1"/>
+    <path d="M3.2 14.6c2.4.5 4-.1 5.2-1.2M15.6 10.600c1.200-1.100 2.800-1.700 5.200-1.200"/>
+    <path d="M14.600 3.200c.5 2.400-.1 4-1.200 5.200M10.600 15.600c-1.100 1.200-1.700 2.800-1.200 5.200"/>
+  </symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <a class="brand glass" href="#home" aria-label="Dantora home">
+    <span class="logo-mark"><svg><use href="#i-logo"/></svg></span>
+    Dantora
+  </a>
+  <nav class="nav-links glass" aria-label="Primary">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#team">Our team</a>
+  </nav>
+  <span class="nav-spacer"></span>
+  <a class="contact-btn" href="#contact"><span class="label">Contact Us</span><span class="dot"><svg class="arrow"><use href="#i-arrow"/></svg></span></a>
+  <button class="menu-btn glass" id="menuBtn" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <canvas class="dna" id="dnaHero" aria-hidden="true"></canvas>
+    <div class="hero-main">
+      <p class="eyebrow" data-fade>About Dantora</p>
+      <h1 class="display" data-reveal>Medicine that starts with understanding you</h1>
+      <p class="body" data-reveal style="--step:14ms">Advanced diagnostics, genetic screening and specialist care in one clinic — with results explained in language you actually understand.</p>
+    </div>
+    <div class="hero-foot">
+      <div>
+        <p class="trusted">Trusted by 40,000+ patients since 2011</p>
+        <div class="cta-row">
+          <a class="btn btn-green" href="#contact">Book a visit</a>
+          <a class="btn btn-yellow" href="#services">Our services</a>
+        </div>
+      </div>
+      <div class="chips">
+        <div class="chips-row">
+          <a class="chip" href="#services">Health Check-ups</a>
+          <a class="chip" href="#services">Diagnostic Imaging</a>
+        </div>
+        <div class="chips-row">
+          <a class="chip" href="#services">Genetic Testing</a>
+          <a class="chip" href="#services">Laboratory</a>
+          <a class="chip" href="#services">Specialist Care</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <p class="eyebrow" data-fade>Why Dantora</p>
+    <h2 class="display" data-reveal>One clinic, one record, one team behind you</h2>
+    <p class="body" data-reveal style="--step:14ms">No referrals across town, no repeated tests. Your doctors share a single medical history and decide together.</p>
+    <div class="cta-row" data-fade>
+      <a class="btn btn-green" href="#team">Our doctors</a>
+      <a class="btn btn-yellow" href="#about">How we work</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <div class="services-pin" id="services">
+    <section class="services">
+      <div class="services-head">
+        <h2 class="display" data-reveal>Everything your diagnosis needs, under one roof</h2>
+        <div class="services-side">
+          <p class="eyebrow" data-fade>Our services</p>
+          <p class="body" data-reveal style="--step:14ms">From a routine check-up to a full genomic panel — five directions that cover prevention, diagnosis and long-term care.</p>
+        </div>
+      </div>
+      <div class="services-view" id="svcView">
+        <div class="services-track" id="svcTrack">
+          <article class="svc svc--list">
+            <span class="svc-num">01</span>
+            <h3 class="svc-title">Preventive Health <span style="white-space:nowrap">Check-ups</span></h3>
+            <ul class="svc-list">
+              <li><a href="#contact">Men's health <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+              <li><a href="#contact">Women's health <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+              <li><a href="#contact">Executive check-up <svg class="arrow"><use href="#i-arrow"/></svg></a></li>
+            </ul>
+          </article>
+          <a class="svc svc--img" href="#contact">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070805_5787c73f-dd92-4275-a288-1deed7a6620d.png" alt="Scientist looking into a microscope in blue light" loading="lazy">
+            <span class="svc-num">02</span>
+            <h3 class="svc-title">Diagnostic Imaging</h3>
+            <div class="svc-foot"><span>Discover</span><span class="ring"><svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+          </a>
+          <a class="svc" href="#contact">
+            <span class="svc-num">03</span>
+            <h3 class="svc-title">Genetic Testing</h3>
+            <div class="svc-foot"><span>Discover</span><span class="ring"><svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+          </a>
+          <a class="svc svc--img" href="#contact">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070806_518cae65-63b1-45fb-b2b2-6b385cacc019.png" alt="Gloved hand pointing at a scan on a monitor" loading="lazy">
+            <span class="svc-num">04</span>
+            <h3 class="svc-title">Laboratory</h3>
+            <div class="svc-foot"><span>Discover</span><span class="ring"><svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+          </a>
+          <a class="svc svc--img" href="#contact">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070805_8edf3fc8-e159-4e76-8b9e-f5bbc800cacf.png" alt="Doctor in navy scrubs with a stethoscope and clipboard" loading="lazy">
+            <span class="svc-num">05</span>
+            <h3 class="svc-title">Specialist Care</h3>
+            <div class="svc-foot"><span>Discover</span><span class="ring"><svg class="arrow"><use href="#i-arrow"/></svg></span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ABOUT + TEAM -->
+  <div class="mint">
+    <section class="about" id="about">
+      <img class="about-photo" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070805_43a76a4d-cd3f-41d6-8111-6b476b8dd1e2.png" alt="Medical team stacking hands together" loading="lazy">
+      <div class="about-grid">
+        <div class="about-stats">
+          <p class="eyebrow">About the clinic</p>
+          <div class="stats" id="stats">
+            <div class="stat"><b data-count="98" data-suffix="%">0%</b><span>Patient satisfaction</span></div>
+            <div class="stat"><b data-count="24" data-suffix="h">0h</b><span>Average lab turnaround</span></div>
+            <div class="stat"><b data-count="52" data-suffix="+">0+</b><span>Doctors and specialists</span></div>
+            <div class="stat"><b data-count="14" data-suffix="">0</b><span>Years of practice</span></div>
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="lede" data-reveal style="--step:26ms">Dantora is a 4,000 m<sup>2</sup> clinic built around a single idea: <strong>diagnosis and treatment should never be separated.</strong> Imaging, laboratory and consulting rooms sit on the same floor, <strong>and every result reaches your doctor the same day.</strong></p>
+          <div class="cta-row" data-fade>
+            <a class="btn btn-green" href="#contact">Book a consultation</a>
+            <a class="btn btn-yellow" href="#contact">Price list</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="team-pin" id="team">
+      <section class="team">
+        <div class="team-row" id="teamRow">
+          <div class="team-card">
+            <p class="eyebrow">Our team</p>
+            <h2 data-reveal>The doctors you'll actually see, every visit.</h2>
+            <div class="socials">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.500 3h9A4.500 4.500 0 0 1 21 7.500v9a4.500 4.500 0 0 1-4.500 4.500h-9A4.500 4.500 0 0 1 3 16.500v-9A4.500 4.500 0 0 1 7.500 3Zm4.500 4.700a4.300 4.300 0 1 0 0 8.600 4.300 4.300 0 0 0 0-8.600Zm0 2.300a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm4.700-3.400a1.100 1.100 0 1 0 0 2.200 1.100 1.100 0 0 0 0-2.200Z" fill-rule="evenodd"/></svg></a>
+              <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.600 21v-7.700h2.600l.4-3.100h-3V8.300c0-.9.300-1.500 1.600-1.500h1.600V4.100c-.3 0-1.300-.1-2.400-.1-2.400 0-4 1.400-4 4.100v2.100H7.800v3.100h2.600V21h3.200Z"/></svg></a>
+              <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.300 9h3.300v11H4.300V9Zm1.650-5.200a1.900 1.900 0 1 1 0 3.800 1.900 1.900 0 0 1 0-3.800ZM9.700 9h3.150v1.500h.05c.44-.83 1.500-1.700 3.100-1.700 3.300 0 3.900 2.150 3.900 4.950V20h-3.300v-5.500c0-1.300 0-3-1.800-3s-2.100 1.400-2.100 2.900V20H9.700V9Z"/></svg></a>
+              <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.750 3.500h3.070l-6.700 7.660L22 20.500h-6.170l-4.830-6.320-5.530 6.320H2.400l7.170-8.190L2 3.500h6.330l4.370 5.770 5.050-5.770Zm-1.080 15.200h1.700L7.400 5.200H5.570l11.100 13.500Z"/></svg></a>
+            </div>
+          </div>
+          <figure class="doc">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070804_5a83d9a7-f383-473c-8663-8c93a7159c55.png" alt="Portrait of Carter Botosh" loading="lazy" draggable="false">
+            <figcaption><b>Carter Botosh</b><span>Cardiologist</span></figcaption>
+          </figure>
+          <figure class="doc">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070806_d4855cb4-cdf9-4515-98b3-b189fe6489c6.png" alt="Portrait of Elena Marsh" loading="lazy" draggable="false">
+            <figcaption><b>Elena Marsh</b><span>Radiologist</span></figcaption>
+          </figure>
+          <figure class="doc">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070806_639949fd-3328-4efa-b5da-816be0bcecb7.png" alt="Portrait of Adrian Kohl" loading="lazy" draggable="false">
+            <figcaption><b>Adrian Kohl</b><span>Medical Geneticist</span></figcaption>
+          </figure>
+          <figure class="doc">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261010_070805_d062d592-64f9-4533-9a68-95400e223e26.png" alt="Portrait of Nora Whitfield" loading="lazy" draggable="false">
+            <figcaption><b>Nora Whitfield</b><span>Endocrinologist</span></figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <canvas class="dna" id="dnaContact" aria-hidden="true"></canvas>
+    <div class="contact-copy">
+      <p class="eyebrow" data-fade>Get in touch</p>
+      <h2 class="display" data-reveal>Not sure which specialist you need? Ask us.</h2>
+      <p class="body" data-reveal style="--step:14ms">Leave your details and a coordinator will call you back within 15 minutes to find the right doctor.</p>
+    </div>
+    <form class="form-card" id="callback" novalidate>
+      <span class="logo-mark"><svg><use href="#i-logo"/></svg></span>
+      <h3>Request a call back</h3>
+      <label class="field"><span class="eyebrow">Your name</span><input type="text" name="name" placeholder="Name" autocomplete="name" required></label>
+      <label class="field"><span class="eyebrow">Your phone</span><input type="tel" name="phone" placeholder="Phone" autocomplete="tel" required></label>
+      <label class="field"><span class="eyebrow">Your message</span><textarea name="message" placeholder="Message" rows="1"></textarea></label>
+      <p class="consent">By submitting, you agree to our <a href="#">Privacy Policy</a> and the processing of your personal data.</p>
+      <div class="form-gap"></div>
+      <button class="send" type="submit"><span id="sendLabel">Send Request</span><span class="dot"><svg class="arrow"><use href="#i-arrow"/></svg></span></button>
+    </form>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  document.documentElement.classList.add('js');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mobileMQ = window.matchMedia('(max-width: 900px)');
+
+  /* ---------- word-by-word blur reveal ---------- */
+  function splitWords(root) {
+    var i = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var s = document.createElement('span');
+            s.className = 'w';
+            s.style.setProperty('--i', i++);
+            s.textContent = part;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1 && child.tagName !== 'SUP') {
+          walk(child);
+        }
+      });
+    })(root);
+  }
+  var revealEls = document.querySelectorAll('[data-reveal]');
+  revealEls.forEach(splitWords);
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('[data-reveal], [data-fade]').forEach(function (el) { io.observe(el); });
+
+  /* ---------- stat counters ---------- */
+  var stats = document.getElementById('stats');
+  var counted = false;
+  new IntersectionObserver(function (entries, obs) {
+    if (!entries[0].isIntersecting || counted) return;
+    counted = true; obs.disconnect();
+    var els = stats.querySelectorAll('[data-count]');
+    var start = performance.now(), dur = reduceMotion ? 1 : 1800;
+    (function tick(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      els.forEach(function (el) {
+        el.textContent = Math.round(+el.dataset.count * e) + el.dataset.suffix;
+      });
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }, { threshold: 0.35 }).observe(stats);
+
+  /* ---------- nav ---------- */
+  var nav = document.getElementById('nav');
+  var menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('.nav-links a').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); });
+  });
+  var contact = document.getElementById('contact');
+
+  /* ---------- pinned horizontal services ---------- */
+  var pin = document.getElementById('services');
+  var track = document.getElementById('svcTrack');
+  var dist = 0;
+  function measure() {
+    if (mobileMQ.matches) { pin.style.height = ''; track.style.transform = ''; dist = 0; return; }
+    dist = Math.max(0, track.scrollWidth - document.documentElement.clientWidth);
+    pin.style.height = (window.innerHeight * 2 + dist) + 'px';
+    onScroll();
+  }
+  function onScroll() {
+    var cr = contact.getBoundingClientRect();
+    nav.classList.toggle('at-contact', cr.top < 60);
+    if (!dist) return;
+    var p = Math.min(1, Math.max(0, -pin.getBoundingClientRect().top / dist));
+    track.style.transform = 'translate3d(' + (-p * dist).toFixed(1) + 'px,0,0)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+
+  // anchor targets inside the stacked/pinned layout
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var id = a.getAttribute('href');
+      if (id.length < 2) { ev.preventDefault(); return; }
+      var t = document.querySelector(id);
+      if (!t) return;
+      ev.preventDefault();
+      var y = t.getBoundingClientRect().top + window.pageYOffset;
+      if (!mobileMQ.matches && id === '#contact') y += window.innerHeight;
+      if (!mobileMQ.matches && id === '#about') y += window.innerHeight;
+      window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---------- drag-to-scroll team row ---------- */
+  var row = document.getElementById('teamRow');
+  var drag = null;
+  row.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.target.closest('a')) return;
+    drag = { x: e.clientX, left: row.scrollLeft };
+    row.classList.add('dragging');
+    row.setPointerCapture(e.pointerId);
+  });
+  row.addEventListener('pointermove', function (e) {
+    if (drag) row.scrollLeft = drag.left - (e.clientX - drag.x);
+  });
+  ['pointerup', 'pointercancel'].forEach(function (t) {
+    row.addEventListener(t, function () { drag = null; row.classList.remove('dragging'); });
+  });
+
+  /* ---------- form ---------- */
+  document.getElementById('callback').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = e.currentTarget, ok = true;
+    form.querySelectorAll('[required]').forEach(function (f) {
+      var bad = !f.value.trim();
+      f.style.borderColor = bad ? '#c2573f' : '';
+      if (bad) ok = false;
+    });
+    if (!ok) return;
+    document.getElementById('sendLabel').textContent = 'Request sent — we’ll call you back';
+    form.reset();
+  });
+
+  /* ---------- WebGL DNA particles ---------- */
+  var VERT = [
+    'attribute vec4 a_data;',   // t along axis, kind (0/1 strands, 2 rung, 3 dust), m (rung lerp), seed
+    'attribute vec3 a_rnd;',
+    'uniform float u_time, u_dpr, u_aspect, u_tilt, u_intro, u_scale;',
+    'uniform vec2 u_center, u_mouse;',
+    'varying vec4 v_col;',
+    'const float TAU = 6.2831853;',
+    'void main() {',
+    '  float t = a_data.x, kind = a_data.y, m = a_data.z, seed = a_data.w;',
+    '  float R = 0.47, L = 2.25, turns = 0.94;',
+    '  float ang = t * turns * TAU + u_time * 0.22 + u_mouse.x * 0.5;',
+    '  float strand = kind < 0.5 ? 0.0 : 1.0;',
+    '  if (kind < 1.5) { ang += strand * 3.14159 + a_rnd.x * 0.16; m = 1.0; }',
+    '  float burst = 1.0 + (1.0 - u_intro) * 3.2;',
+    '  float far = length(a_rnd);',
+    '  vec3 p = vec3(cos(ang) * R * m, t * L, sin(ang) * R * m);',
+    '  vec3 off = a_rnd * burst;',
+    '  float w = u_time * 0.55 + seed * TAU;',
+    '  off += 0.022 * far * 6.0 * vec3(sin(w + t * 9.0), cos(w * 0.8 + t * 7.0), sin(w * 1.3 + t * 5.0));',
+    '  p += off;',
+    '  float depth = p.z;',
+    '  float ct = cos(u_tilt), st = sin(u_tilt);',
+    '  p.xy = vec2(p.x * ct - p.y * st, p.x * st + p.y * ct);',
+    '  float persp = 1.0 / (1.0 - p.z * 0.22);',
+    '  vec2 s = p.xy * persp * u_scale;',
+    '  gl_Position = vec4(s.x / u_aspect + u_center.x, s.y + u_center.y + u_mouse.y * 0.02, 0.0, 1.0);',
+    '  vec3 deep = vec3(0.106, 0.345, 0.224);',
+    '  vec3 leaf = vec3(0.325, 0.588, 0.196);',
+    '  vec3 lime = vec3(0.741, 0.871, 0.314);',
+    '  vec3 dust = vec3(0.47, 0.57, 0.55);',
+    '  float halo = smoothstep(0.08, 0.36, far);',
+    '  vec3 col = mix(deep, leaf, smoothstep(0.0, 0.55, seed));',
+    '  col = mix(col, lime, smoothstep(0.5, 1.0, seed) * 0.8 + smoothstep(0.05, 0.16, far) * 0.3);',
+    '  col = mix(col, dust, halo * 0.55);',
+    '  float alpha = mix(0.7, 0.24, halo);',
+    '  if (kind > 2.5) { col = mix(dust, leaf, seed * 0.35); alpha = 0.2; }',
+    '  else if (kind > 1.5) { col = mix(dust, deep, 0.25); alpha = 0.24 * (0.5 + 0.5 * smoothstep(-0.4, 0.4, depth)); }',
+    '  col *= 0.86 + 0.24 * smoothstep(-0.5, 0.5, depth);',
+    '  float edge = 1.0 - smoothstep(0.82, 1.0, abs(t));',
+    '  v_col = vec4(col, alpha * edge * u_intro);',
+    '  gl_PointSize = u_dpr * (1.3 + fract(seed * 7.31) * 2.1) * persp;',
+    '}'
+  ].join('\n');
+  var FRAG = [
+    'precision mediump float;',
+    'varying vec4 v_col;',
+    'void main() {',
+    '  vec2 c = gl_PointCoord - 0.5;',
+    '  float a = v_col.a * smoothstep(0.5, 0.18, length(c));',
+    '  gl_FragColor = vec4(v_col.rgb * a, a);',
+    '}'
+  ].join('\n');
+
+  function gauss() {
+    var u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2831853 * v);
+  }
+
+  function createDNA(canvas, opts) {
+    var gl = canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: 'high-performance' });
+    if (!gl) return;
+    function shader(type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
+      return s;
+    }
+    var prog = gl.createProgram();
+    gl.attachShader(prog, shader(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    var small = Math.min(window.innerWidth, window.innerHeight) < 700;
+    var N = small ? 80000 : 170000;
+    var RUNGS = 34;
+    var buf = new Float32Array(N * 7);
+    for (var i = 0; i < N; i++) {
+      var o = i * 7, r = Math.random();
+      var t = Math.random() * 2 - 1, kind, m = 1, sx, sy, sz;
+      if (r < 0.87) {
+        kind = Math.random() < 0.5 ? 0 : 1;
+        // dense core with a long wispy tail
+        var clump = 0.6 + 0.9 * Math.pow(Math.abs(Math.sin(t * 17 + kind * 1.7) * Math.sin(t * 41 + 1.3)), 0.7);
+        var spread = (Math.random() < 0.52 ? 0.018 + Math.random() * 0.034 : 0.05 + Math.pow(Math.random(), 2.3) * 0.21) * clump;
+        sx = gauss() * spread; sy = gauss() * spread * 1.25; sz = gauss() * spread;
+      } else if (r < 0.93) {
+        kind = 2;
+        t = ((Math.floor(Math.random() * RUNGS) + 0.5) / RUNGS) * 2 - 1;
+        m = Math.random() * 2 - 1;
+        sx = gauss() * 0.004; sy = gauss() * 0.004; sz = gauss() * 0.004;
+      } else {
+        kind = 3;
+        m = Math.random() < 0.5 ? -1 : 1;
+        var d = 0.12 + Math.random() * 0.34;
+        sx = gauss() * d; sy = gauss() * d; sz = gauss() * d;
+        if (Math.random() < 0.5) kind = 3;
+      }
+      buf[o] = t; buf[o + 1] = kind; buf[o + 2] = m; buf[o + 3] = Math.random();
+      buf[o + 4] = sx; buf[o + 5] = sy; buf[o + 6] = sz;
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, buf, gl.STATIC_DRAW);
+    var aData = gl.getAttribLocation(prog, 'a_data'), aRnd = gl.getAttribLocation(prog, 'a_rnd');
+    gl.enableVertexAttribArray(aData); gl.vertexAttribPointer(aData, 4, gl.FLOAT, false, 28, 0);
+    gl.enableVertexAttribArray(aRnd); gl.vertexAttribPointer(aRnd, 3, gl.FLOAT, false, 28, 16);
+
+    var U = {};
+    ['u_time', 'u_dpr', 'u_aspect', 'u_tilt', 'u_intro', 'u_scale', 'u_center', 'u_mouse'].forEach(function (n) { U[n] = gl.getUniformLocation(prog, n); });
+    gl.disable(gl.DEPTH_TEST);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.clearColor(0, 0, 0, 0);
+
+    var dpr = 1, visible = false, raf = 0, t0 = performance.now(), introStart = null;
+    var mouse = [0, 0], mouseT = [0, 0];
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      gl.viewport(0, 0, w, h);
+    }
+    function frame(now) {
+      raf = 0;
+      if (!visible) return;
+      if (introStart === null) introStart = now;
+      var intro = Math.min(1, (now - introStart) / 2400);
+      intro = 1 - Math.pow(1 - intro, 3);
+      mouse[0] += (mouseT[0] - mouse[0]) * 0.04;
+      mouse[1] += (mouseT[1] - mouse[1]) * 0.04;
+      var aspect = canvas.width / canvas.height;
+      var narrow = aspect < 0.9;
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform1f(U.u_time, reduceMotion ? 4.0 : (now - t0) / 1000 + (opts.offset || 0));
+      gl.uniform1f(U.u_dpr, dpr);
+      gl.uniform1f(U.u_aspect, aspect);
+      gl.uniform1f(U.u_tilt, narrow ? opts.tilt * 0.6 : opts.tilt);
+      gl.uniform1f(U.u_intro, reduceMotion ? 1 : intro);
+      gl.uniform1f(U.u_scale, narrow ? 0.72 : 1.0);
+      gl.uniform2f(U.u_center, narrow ? opts.centerNarrow : opts.center, 0.0);
+      gl.uniform2f(U.u_mouse, mouse[0], mouse[1]);
+      gl.drawArrays(gl.POINTS, 0, N);
+      if (!reduceMotion || intro < 1) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      kick();
+    }, { threshold: 0 }).observe(canvas);
+    window.addEventListener('resize', function () { resize(); kick(); });
+    window.addEventListener('pointermove', function (e) {
+      mouseT[0] = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseT[1] = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+    resize();
+  }
+
+  createDNA(document.getElementById('dnaHero'), { center: 0.36, centerNarrow: 0.34, tilt: -0.42, offset: 0 });
+  createDNA(document.getElementById('dnaContact'), { center: -0.14, centerNarrow: 0.3, tilt: -0.42, offset: 9 });
+})();
+</script>
+</body>
+</html>
